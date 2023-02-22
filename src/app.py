@@ -38,7 +38,7 @@ def createFile():
         f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         cursor = conexion.connection.cursor()
         sql = """INSERT INTO file(filename, fecha, createdBy, routes) 
-        VALUES('{0}','{1}', '{2}', '{3}')""".format(filename, datetime.now(), "Marcos Alejos", path + "/"+filename)
+        VALUES('{0}','{1}', '{2}', '{3}')""".format(filename, datetime.now(), "Marcos Alejos", path + "/" + filename)
         cursor.execute(sql)
         conexion.connection.commit()
         return redirect(url_for('filelist'))
@@ -57,6 +57,15 @@ def deleteFile(id):
         cursor.execute(sql)
         conexion.connection.commit()
         return redirect(url_for('filelist'))
+    except Exception as e:
+        return "Error"
+
+@app.route('/buscar', methods=['GET', 'POST'])
+def buscar():
+    try:
+        if request.method == "POST":
+            texto = request.form['']
+            
     except Exception as e:
         return "Error"
 
